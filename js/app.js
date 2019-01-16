@@ -42,7 +42,6 @@ function startG(){
 	for (let i = 0; i < allStars.length; i++){ /*Resetando o valor das estrelas*/
 		allStars[i].classList.remove('hide-star');
 	}
-	shuffle(arrayimg);
 	document.getElementsByClassName('deck')[0].innerHTML = ''; /*Recebe o elemento ul buscando pela class e armazena em uma array, como é uma array precisa informar a posição por isso do [0] depois do ('deck') o innerHTML = '' limpa o conteudo de ul*/
 	moves = 0;
 	document.querySelector('.moves').innerHTML = moves; /*Para limpar na tela do html também não só zerar o moves*/
