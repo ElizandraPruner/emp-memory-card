@@ -183,18 +183,21 @@ function clickLevel(){
 		$('#chooseeasy').attr('checked', true);
 		$('#choosemedium').prop('checked', false);
 		$('#choosehard').prop('checked', false);
+		startG();
 	})
 
 	$('#choosemedium').on('click', function(){
 		$('#choosemedium').attr('checked', true);
 		$('#chooseeasy').prop('checked', false);
 		$('#choosehard').prop('checked', false);
+		startG();
 	})
 
 	$('#choosehard').on('click', function(){
 		$('#choosehard').attr('checked', true);
 		$('#chooseeasy').prop('checked', false);
 		$('#choosemedium').prop('checked', false);
+		startG();
 	})
 	
 }
