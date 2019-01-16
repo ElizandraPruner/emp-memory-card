@@ -2,7 +2,9 @@
  * Create a list that holds all of your cards
  */
 
-const arrayimg = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-anchor', 'fa-leaf', 'fa-bicycle', 'fa-diamond', 'fa-bomb', 'fa-leaf', 'fa-bomb', 'fa-bolt', 'fa-bicycle', 'fa-paper-plane-o', 'fa-cube'];
+const arrayimgdez = ['fa-diamond', 'fa-diamond', 'fa-anchor',  'fa-anchor', 'fa-leaf', 'fa-leaf', 'fa-bomb', 'fa-bomb', 'fa-bolt', 'fa-bolt', 'fa-bicycle', 'fa-bicycle', 'fa-money', 'fa-money', 'fa-paw', 'fa-paw'];
+const arrayimgvint = ['fa-book', 'fa-book', 'fa-car', 'fa-car', 'fa-coffee', 'fa-coffee', 'fa-desktop', 'fa-desktop', 'fa-gamepad', 'fa-gamepad', 'fa-futbol-o', 'fa-futbol-o', 'fa-gift', 'fa-gift', 'fa-headphones', 'fa-headphones', 'fa-diamond', 'fa-diamond', 'fa-money', 'fa-money'];
+const arrayimgvintq = ['fa-car', 'fa-car', 'fa-coffee', 'fa-coffee', 'fa-desktop', 'fa-desktop', 'fa-gamepad', 'fa-gamepad', 'fa-futbol-o', 'fa-futbol-o', 'fa-headphones', 'fa-headphones', 'fa-money', 'fa-money', 'fa-anchor', 'fa-anchor', 'fa-bolt', 'fa-bolt', 'fa-paw', 'fa-paw', 'fa-bicycle', 'fa-bicycle', 'fa-bomb', 'fa-bomb'];
 const allStars = document.getElementsByClassName('fa-star'); /*Insere na array todos os elementos com a class fa-star/todas as estrelas*/
 let open = [];
 let deck = document.querySelector('.deck'); 
@@ -50,17 +52,7 @@ function startG(){
 	clearInterval(gameInterval); /*Reseta o timer para 00:00*/
 	document.querySelector('.displayTime').innerHTML = '00:00'; /*Limpa o tempo na tela do html*/
 	document.querySelector('#timeEnd').innerHTML = '00:00';
-	for (let i = 0; i < 16; i++){
-		let liElement = document.createElement('li');
-		liElement.classList.add('card');
-		let iElement = document.createElement('i');
-		iElement.classList.add('fa'); 		
-		iElement.classList.add(arrayimg[i]); 
-		liElement.append(iElement);
-		liElement.addEventListener('click', clicked);	
-		deck.append(liElement);
-	}
-	
+	distributeCards();	
 }
 	
 startG();
@@ -72,7 +64,7 @@ function hideStars(){
 	if (moves === 16) { 
 		allStars[0].classList.add('hide-star'); /*Esconde a primeira estrela do score-panel*/
 		allStars[3].classList.add('hide-star'); /*Esconde a primeira estrela do modal*/
-	} else if (moves === 20) { 
+	} else if (moves === 30) { 
 		allStars[1].classList.add('hide-star'); /*Esconde a segunda estrela do score-panel*/
 		allStars[4].classList.add('hide-star'); /*Esconde a segunda estrela do modal*/
 	}
@@ -82,7 +74,7 @@ function count_moves(){
 	moves += 1;
 	document.querySelector('.moves').innerHTML = moves;
 	document.querySelector('#movesEnd').innerHTML = moves;
-	if (20 >= moves > 0) { 
+	if (30 >= moves > 0) { 
 		hideStars();
 	}
 }
@@ -117,11 +109,20 @@ function clicked(){
 				lock = false;
 			}, 1000)
 			cardsMatcheds += 1; 
-			if (cardsMatcheds === 8){
-				document.querySelector('.modal').classList.add('modal-show');
+			if (cardsMatcheds === 12 && ($('#choosehard').is(':checked'))){
+				$('.modal').addClass('modal-show');
 				clearInterval(gameInterval); 
+			}
 
-				}
+			if (cardsMatcheds === 10 && ($('#choosemedium').is(':checked'))){
+				$('.modal').addClass('modal-show');
+				clearInterval(gameInterval); 
+			}
+						
+			if (cardsMatcheds === 8 && ($('#chooseeasy').is(':checked'))){
+				$('.modal').addClass('modal-show');
+				clearInterval(gameInterval); 
+			}
 		} else {
 			open[0].classList.toggle('unMatch');
 			open[1].classList.toggle('unMatch');
@@ -176,6 +177,69 @@ function NotPlayAgain(){
 	buttonNot.addEventListener('click', function(){
 	document.querySelector('.modal').classList.remove('modal-show');
 	})
+}
+
+function clickLevel(){
+	$('#chooseeasy').on('click', function(){
+		$('#chooseeasy').attr('checked', true);
+		$('#choosemedium').prop('checked', false);
+		$('#choosehard').prop('checked', false);
+	})
+
+	$('#choosemedium').on('click', function(){
+		$('#choosemedium').attr('checked', true);
+		$('#chooseeasy').prop('checked', false);
+		$('#choosehard').prop('checked', false);
+	})
+
+	$('#choosehard').on('click', function(){
+		$('#choosehard').attr('checked', true);
+		$('#chooseeasy').prop('checked', false);
+		$('#choosemedium').prop('checked', false);
+	})
+	
+}
+function distributeCards(){	
+		clickLevel();
+	if ($('#chooseeasy').is(':checked')){		
+		shuffle(arrayimgdez);
+		for (let i = 0; i < 16; i++){
+		let liElement = document.createElement('li');
+		liElement.classList.add('card');
+		let iElement = document.createElement('i');
+		iElement.classList.add('fa'); 		
+		iElement.classList.add(arrayimgdez[i]); 
+		liElement.append(iElement);
+		liElement.addEventListener('click', clicked);	
+		deck.append(liElement);
+		}		
+	} 
+	if ($('#choosemedium').is(':checked')){				
+		shuffle(arrayimgvint);
+		for (let i = 0; i < 20; i++){
+		let liElement = document.createElement('li');
+		liElement.classList.add('card');
+		let iElement = document.createElement('i');
+		iElement.classList.add('fa'); 		
+		iElement.classList.add(arrayimgvint[i]); 
+		liElement.append(iElement);
+		liElement.addEventListener('click', clicked);	
+		deck.append(liElement);
+		}		
+	}
+	if ($('#choosehard').is(':checked')){
+		shuffle(arrayimgvintq);
+		for (let i = 0; i < 24; i++){
+		let liElement = document.createElement('li');
+		liElement.classList.add('card');
+		let iElement = document.createElement('i');
+		iElement.classList.add('fa'); 		
+		iElement.classList.add(arrayimgvintq[i]); 
+		liElement.append(iElement);
+		liElement.addEventListener('click', clicked);	
+		deck.append(liElement);
+		}
+	} 
 }
 
 	
