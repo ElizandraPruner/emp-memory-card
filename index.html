@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>Matching Game</title>
     <meta name="description" content="">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
@@ -12,9 +11,16 @@
 <body>
     <div class="container">
         <header>
-            <h1>Memory Game</h1>
-            <img src="img/logo_eliz_w168.png">
+            <h1 class="titlememory">Memory Game</h1>
+            <img class="logo" src="img/logo_eliz_w168.png">
         </header>
+        <section>
+            <ul>
+                <li class="chooselevel"><input type="radio" name="easy" id="chooseeasy">Easy</li>
+                <li class="chooselevel"><input type="radio" name="medium" id="choosemedium">Medium</li>
+                <li class="chooselevel"><input type="radio" name="hard" id="choosehard">Hard</li>
+            </ul>            
+        </section>
         <section class="score-panel">
         	<ul class="stars">
         		<li><i class="fa fa-star"></i></li>
@@ -54,6 +60,7 @@
             <button class="button" id="not">Not</button>            
         </p>        
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
